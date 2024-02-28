@@ -1,0 +1,37 @@
+.custom-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Tăng độ cong của các góc */
+    background-color: #f0f2f5; /* Màu nền */
+    width: 100%; /* Độ rộng tối đa */
+    box-sizing: border-box; /* Box model */
+}
+
+.custom-input:focus {
+    outline: none; /* Loại bỏ viền nền khi input được focus */
+    border-color: #1877f2; /* Màu viền khi input được focus */
+    box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2); /* Hiệu ứng đổ bóng khi input được focus */
+}
+
+
+.custom-button {
+    background-color: #1877f2; 
+    color: #fff; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+
+    /* Định dạng khi rê chuột vào button */
+    &:hover {
+        background-color: #166fe5; /* Màu nền của button khi hover */
+    }
+
+    /* Định dạng khi button được nhấn */
+    &:active {
+        transform: translateY(1px); /* Di chuyển button xuống 1px khi nhấn */
+    }
+}
