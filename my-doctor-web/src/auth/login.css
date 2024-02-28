@@ -1,0 +1,8 @@
+.login-container {
+    background-color: #fbf4f4; /* Màu đỏ */
+    height: 100vh; /* Chiều cao là 100% chiều cao của màn hình */
+    display: flex; /* Sử dụng flexbox để căn giữa nội dung */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+  }
+  

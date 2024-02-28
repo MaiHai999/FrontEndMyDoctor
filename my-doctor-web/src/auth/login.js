@@ -1,11 +1,12 @@
 import InputCustom from "../entity/InputCustom";
 import ButtonCustom from "../entity/ButtonCustom";
+import FormCustom from "../entity/FormCustom";
+import './login.css'
 
 function Login() {
   console.log("Vô được ");
   return (
-    <div>
-      <h1> hai mai</h1>
+    <div className="login-container">
       <InputCustom
         type="text"
         values=""
@@ -16,6 +17,10 @@ function Login() {
       <ButtonCustom type="button" onClick={() => console.log("Button clicked")}>
         Click me
       </ButtonCustom>
+
+      <FormCustom>
+
+      </FormCustom>
     </div>
   );
 }

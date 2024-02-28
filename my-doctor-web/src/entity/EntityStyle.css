@@ -27,11 +27,26 @@
 
     /* Định dạng khi rê chuột vào button */
     &:hover {
-        background-color: #166fe5; /* Màu nền của button khi hover */
+        background-color: #166fe5; 
     }
 
     /* Định dạng khi button được nhấn */
     &:active {
-        transform: translateY(1px); /* Di chuyển button xuống 1px khi nhấn */
+        transform: translateY(1px); 
     }
 }
+
+
+.custom-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%; /* Độ rộng của form */
+    margin: 0 auto; /* Canh giữa form */
+    padding: 20px; /* Khoảng cách bên trong form */
+    background-color: #de1212; /* Màu nền của form */
+    border: 2px solid #dddddd; /* Viền của form */
+    border-radius: 8px; /* Bo tròn góc của form */
+}
+
