@@ -3,13 +3,13 @@ import './EntityStyle.css'
 
 
 function ButtonCustom(props){
-    const { type, onClick, children } = props; 
+    const { type, onClick, children , className} = props; 
 
     return (
         <button
             type={type} 
             onClick={onClick} 
-            className="custom-button" 
+            className={`custom-button ${className}`}  
         >
             {children} 
         </button>
