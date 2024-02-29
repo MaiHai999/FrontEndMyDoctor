@@ -1,52 +1,71 @@
 .custom-input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px; /* Tăng độ cong của các góc */
-    background-color: #f0f2f5; /* Màu nền */
-    width: 100%; /* Độ rộng tối đa */
-    box-sizing: border-box; /* Box model */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px; /* Tăng độ cong của các góc */
+  background-color: #f0f2f5; /* Màu nền */
+  width: 100%; /* Độ rộng tối đa */
+  box-sizing: border-box; /* Box model */
 }
 
 .custom-input:focus {
-    outline: none; /* Loại bỏ viền nền khi input được focus */
-    border-color: #1877f2; /* Màu viền khi input được focus */
-    box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2); /* Hiệu ứng đổ bóng khi input được focus */
+  outline: none; /* Loại bỏ viền nền khi input được focus */
+  border-color: #1877f2; /* Màu viền khi input được focus */
+  box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2); /* Hiệu ứng đổ bóng khi input được focus */
 }
-
 
 .custom-button {
-    background-color: #1877f2; 
-    color: #fff; 
-    padding: 10px 20px; 
-    font-size: 16px; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    transition: background-color 0.3s ease; 
+  background-color: #1877f2;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+  font-size: 19px; 
 
-    /* Định dạng khi rê chuột vào button */
-    &:hover {
-        background-color: #166fe5; 
-    }
+  /* Định dạng khi rê chuột vào button */
+  &:hover {
+    background-color: #166fe5;
+  }
 
-    /* Định dạng khi button được nhấn */
-    &:active {
-        transform: translateY(1px); 
-    }
+  /* Định dạng khi button được nhấn */
+  &:active {
+    transform: scale(0.99);
+    transform-origin: center;
+  }
 }
-
 
 .custom-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50%; /* Độ rộng của form */
-    margin: 0 auto; /* Canh giữa form */
-    padding: 20px; /* Khoảng cách bên trong form */
-    background-color: #de1212; /* Màu nền của form */
-    border: 2px solid #dddddd; /* Viền của form */
-    border-radius: 8px; /* Bo tròn góc của form */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px; /* Độ rộng của form */
+  margin: 0 auto; /* Canh giữa form */
+  padding: 20px; /* Khoảng cách bên trong form */
+  background-color: #ffffff; /* Màu nền của form */
+  border: 2px solid #dddddd; /* Viền của form */
+  border-radius: 8px; /* Bo tròn góc của form */
+  transform: translateY(0%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Tạo bóng đổ màu đen nhạt */
+
 }
 
+
+.custom-a {
+    color: blue; /* Màu chữ xanh */
+    font-weight: bold;
+}
+
+
+.custom-image {
+    width: 19px;
+    margin-right: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    transform: translateY(16%);
+}

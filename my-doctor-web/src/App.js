@@ -8,7 +8,6 @@ function App() {
   // Trả về một phần tử JSX
   return (
     <div>
-      <h1>My App</h1>
       <Login />
     </div>
   );
