@@ -1,5 +1,5 @@
 
-import './EntityStyle.css'
+import '../styles/EntityStyle.css'
 
 
 function ButtonCustom(props){

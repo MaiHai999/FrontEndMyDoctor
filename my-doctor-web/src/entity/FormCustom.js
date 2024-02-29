@@ -2,7 +2,7 @@
 
 
 
-import './EntityStyle.css'
+import '../styles/EntityStyle.css'
 
 
 function FormCustom(props) {

@@ -1,6 +1,6 @@
 
 
-import './EntityStyle.css'
+import '../styles/EntityStyle.css'
 
 
 function ImageCustom(props) {

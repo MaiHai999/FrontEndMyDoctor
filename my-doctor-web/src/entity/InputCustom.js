@@ -1,6 +1,7 @@
 
+import '../styles/EntityStyle.css'
 
-import './EntityStyle.css'
+
 
 function InputCustom(props){
     const { type,value ,onChange, placeholder } = props;
@@ -12,8 +13,6 @@ function InputCustom(props){
             onChange={onChange}
             placeholder={placeholder}
             className="custom-input"
-
-
         />
     );
 

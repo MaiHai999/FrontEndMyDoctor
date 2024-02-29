@@ -16,6 +16,7 @@
   width: 100%;
   font-size: 18px;
   background-color: #414643;
+  margin-top: 10px;
 
   &:hover {
     background-color: #313335;
@@ -30,7 +31,7 @@
 
 .button-link {
   width: 100%;
-  font-size: 17px;
+  font-size: 14px;
   background-color: #ffffff;
   color: black;
   border: 1px solid rgb(195, 200, 207);
@@ -46,5 +47,13 @@
 .form-logo {
   width: 120px; /* Định kích thước của logo */
   margin-bottom: 90px; /* Khoảng cách giữa logo và các phần tử khác */
+}
+
+
+.error-message {
+  color: red;
+  font-size: 10px;
+  margin: 0px;
+
 }
 

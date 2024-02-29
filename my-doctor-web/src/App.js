@@ -1,14 +1,10 @@
-import "./App.css";
-import Login from "./auth/login";
+import LoginContainer from "./components/Containers/loginContainer";
 
 function App() {
-  // Gọi hàm innerFunction() từ bên trong hàm App()
-  Login();
-
   // Trả về một phần tử JSX
   return (
     <div>
-      <Login />
+      <LoginContainer />
     </div>
   );
 }

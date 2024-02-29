@@ -1,12 +1,18 @@
-import InputCustom from "../entity/InputCustom";
-import ButtonCustom from "../entity/ButtonCustom";
-import FormCustom from "../entity/FormCustom";
-import ACustom from "../entity/ACustom";
-import ImageCustom from "../entity/ImgCustom";
-import "./login.css";
+import InputCustom from "../../entity/InputCustom";
+import ButtonCustom from "../../entity/ButtonCustom";
+import FormCustom from "../../entity/FormCustom";
+import ACustom from "../../entity/ACustom";
+import ImageCustom from "../../entity/ImgCustom";
+import InputPasswordCustom from "../../entity/InputPasswordCustom";
+import "../../styles/login.css";
 
-function Login() {
-  console.log("Vô được ");
+function Login({
+  onUsernameChange,
+  onPasswordChange,
+  onLogin,
+  usernameError,
+  passwordError,
+}) {
   return (
     <div className="login-container">
       <FormCustom>
@@ -27,25 +33,26 @@ function Login() {
           <InputCustom
             type="text"
             values=""
-            onChange={() => {}}
+            onChange={onUsernameChange}
             placeholder="Nhập email"
           />
 
-          <InputCustom
+          {usernameError && <p className="error-message">{usernameError}</p>}
+
+          <InputPasswordCustom
             type="password"
             values=""
-            onChange={() => {}}
+            onChange={onPasswordChange}
             placeholder="Mật khẩu"
           />
+          {passwordError && <p className="error-message">{passwordError}</p>}
+
         </div>
 
+        
         <div style={{ marginBottom: "15px" }}></div>
 
-        <ButtonCustom
-          type="button"
-          onClick={() => console.log("Button clicked")}
-          className="button-login"
-        >
+        <ButtonCustom type="button" onClick={onLogin} className="button-login">
           Đăng nhập
         </ButtonCustom>
 

@@ -1,7 +1,7 @@
 
 
 
-import './EntityStyle.css'
+import '../styles/EntityStyle.css'
 
 
 function ACustom(props){
