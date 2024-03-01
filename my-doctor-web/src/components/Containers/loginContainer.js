@@ -1,7 +1,8 @@
 import Login from "../UIComponents/login";
 import React, { useState } from 'react';
-import CallAPI from "../../utils/CallAPI";
-import CreateRequestOptions from "../../utils/CreateRequestOptions";
+import AuthServices from "../../services/AuthServices";
+import * as token from "../../entity/HandleToken"
+
 
 function LoginContainer() {
   const [username, setUsername] = useState("");
@@ -10,54 +11,65 @@ function LoginContainer() {
   const [passwordError, setPasswordError] = useState('');
 
 
-  // Hàm xử lý sự kiện khi người dùng thay đổi username
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
 
-  // Hàm xử lý sự kiện khi người dùng thay đổi password
+  
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
   const validateEmail = (email) => {
-    return email.length === 0;
+    if(email.length === 0){
+      setUsernameError('Email không hợp lệ');
+    }else{
+      setUsernameError('');
+    }
   };
 
   const validatePassword = (password) => {
-    return password.length === 0;
-  };
-
-  const onLogin = (event) => {
-    
-    if (validateEmail(username)) {
-      setUsernameError('Email không hợp lệ');
-    }
-    else{
-      setUsernameError('');
-    }
-    if (validatePassword(password)) {
-        setPasswordError('Mật khẩu không hợp lệ');
-    }
-    else{
+    if (password.length === 0){
+      setPasswordError('Mật khẩu không hợp lệ');
+    }else{
       setPasswordError('');
     }
+  };
 
-    const data = {
-      email: username,
-      password: password
-    };
-
-    const requestOptions = CreateRequestOptions(data);
-    const url = "http://localhost:5000/auth/login";
-    CallAPI(url,requestOptions).then(response => {
-      console.log('Response JSON:', response.data);
-  })
+  // hàm kích hoạt khi bấm nút login
+  const onLogin = (event) => {
     
+    validateEmail(username)
+    validatePassword(password)
 
+    if (username.length !== 0 && password.length !== 0){
+      const data = {
+        email: username,
+        password: password
+      };
+  
+      AuthServices(data).then(res=>{
+        token.saveAccessToken(res.data.access_token)
+        token.saveRefreshToken(res.data.refresh_token)
+
+
+      })
+      .catch(error =>{
+        if (error.response.data.msg === "Incorrect password") {
+          setPasswordError('Mật khẩu không đúng');
+        }else{
+          setUsernameError("Email bạn không được đăng kí trong hệ thống");
+        }
+        
+      });
+  
+
+    }
 
   };
  
+  //
+
   return (
     <Login
       onUsernameChange={handleUsernameChange}
