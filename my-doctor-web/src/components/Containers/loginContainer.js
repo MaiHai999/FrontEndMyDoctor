@@ -1,7 +1,9 @@
 import Login from "../UIComponents/login";
-import React, { useState } from 'react';
-import AuthServices from "../../services/AuthServices";
+import React, { useState , useEffect } from 'react';
+import * as service from "../../services/AuthServices";
 import * as token from "../../entity/HandleToken"
+import * as url from "../../Config";
+
 
 
 function LoginContainer() {
@@ -48,10 +50,9 @@ function LoginContainer() {
         password: password
       };
   
-      AuthServices(data).then(res=>{
+      service.AuthServices(data).then(res=>{
         token.saveAccessToken(res.data.access_token)
         token.saveRefreshToken(res.data.refresh_token)
-
 
       })
       .catch(error =>{
@@ -68,7 +69,42 @@ function LoginContainer() {
 
   };
  
-  //
+  //hàm kích hoạt bấm nút login with gg
+  const onLoginGG = (event) =>{
+    service.AuthServicesGG().then(res =>{
+      window.location.href = res.data.authorization_url ; 
+    }).catch(error  =>{
+      console.error('Error:', error);
+      alert("Thất bại liên kết tài khoản Google");
+    });
+
+  };
+
+
+  useEffect(() => {
+
+    const pathname = window.location.pathname;
+    if (pathname === "/callback"){
+      const urlParams = new URLSearchParams(window.location.search);
+      const param = urlParams.toString()
+      const newURl = url.url_login_callback_gg + "?" + param;
+
+      service.AuthServicesCallBackGG(newURl)
+      .then(res =>{
+        token.saveAccessToken(res.data.access_token)
+        token.saveRefreshToken(res.data.refresh_token)
+      }).catch(error =>{
+        if(error.response.data.error === "Email already exists"){
+          alert("Email đã được đăng kí vào hệ thống");
+        } else{
+          alert(error.response.data.error);
+        }
+      });
+
+    }
+  }, []);
+
+  
 
   return (
     <Login
@@ -77,6 +113,7 @@ function LoginContainer() {
       onLogin={onLogin}
       usernameError = {usernameError} 
       passwordError = {passwordError}
+      onLoginGG= {onLoginGG}
     />
   );
 }

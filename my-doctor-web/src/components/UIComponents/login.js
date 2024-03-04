@@ -12,6 +12,7 @@ function Login({
   onLogin,
   usernameError,
   passwordError,
+  onLoginGG,
 }) {
   return (
     <div className="login-container">
@@ -80,7 +81,7 @@ function Login({
         >
           <ButtonCustom
             type="button"
-            onClick={() => console.log("Button clicked")}
+            onClick={onLoginGG}
             className="button-link"
           >
             <ImageCustom
