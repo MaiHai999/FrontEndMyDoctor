@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import InputCustom from "../../entity/InputCustom";
 import ButtonCustom from "../../entity/ButtonCustom";
 import FormCustom from "../../entity/FormCustom";
@@ -47,10 +48,8 @@ function Login({
             placeholder="Mật khẩu"
           />
           {passwordError && <p className="error-message">{passwordError}</p>}
-
         </div>
 
-        
         <div style={{ marginBottom: "15px" }}></div>
 
         <ButtonCustom type="button" onClick={onLogin} className="button-login">
@@ -61,13 +60,17 @@ function Login({
           <ACustom href="https://www.example.com" linkText="Quên mật khẩu?" />
         </div>
 
-        <ButtonCustom
-          type="button"
-          onClick={() => console.log("Button clicked")}
-          className="button-singup"
-        >
-          Tạo tài khoản
-        </ButtonCustom>
+        <div style={{ width: "100%" }}>
+          <Link to="/regiter">
+            <ButtonCustom
+              type="button"
+              onClick={() => {}}
+              className="button-singup"
+            >
+              Tạo tài khoản
+            </ButtonCustom>
+          </Link>
+        </div>
 
         <div class="separator"></div>
 
