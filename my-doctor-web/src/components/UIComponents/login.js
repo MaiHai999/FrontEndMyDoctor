@@ -24,14 +24,7 @@ function Login({
           className="form-logo"
         />
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "10px",
-            width: "100%",
-          }}
-        >
+        <div className="list_input">
           <InputCustom
             type="text"
             values=""

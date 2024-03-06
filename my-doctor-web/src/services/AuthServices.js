@@ -13,7 +13,13 @@ export function AuthServicesGG(){
     return axios.post(url.url_login_gg);
 }
 
+export function AuthServicesRegister(data){
+    return axios.post(url.url_register,data);
+}
+
+
 
 export function AuthServicesCallBackGG(url){
     return axios.get(url);
 }
+
