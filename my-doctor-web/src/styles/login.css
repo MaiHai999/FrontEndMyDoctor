@@ -65,3 +65,27 @@
   width: 100%;
 }
 
+
+.list_button_link {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 100%;
+}
+
+
+.spinner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* Giá trị z-index cao để spinner chồng lên phần tử khác */
+}
+
+.blurred {
+  filter: blur(3px); /* Mờ hóa nội dung */
+  pointer-events: none; /* Không cho phép tương tác với các phần tử bên dưới */
+  transition: filter 0.3s ease; /* Hiệu ứng mờ diệu chuyển */
+}
+
+

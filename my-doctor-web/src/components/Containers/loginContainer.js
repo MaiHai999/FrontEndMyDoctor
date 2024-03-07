@@ -1,92 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Login from "../UIComponents/login";
 import * as service from "../../services/AuthServices";
-import * as token from "../../entity/HandleToken"
+import * as token from "../../entity/HandleToken";
+import { errorMessages } from "../../Config";
 
-
-
-function LoginContainer() {
+function LoginContainer({
+  validateEmail,
+  validatePassword,
+  handleUsernameChange,
+  handlePasswordChange,
+  onLoginGG,
+}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [usernameError, setUsernameError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-
-
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
-  
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const validateEmail = (email) => {
-    if(email.length === 0){
-      setUsernameError('Email không hợp lệ');
-    }else{
-      setUsernameError('');
-    }
-  };
-
-  const validatePassword = (password) => {
-    if (password.length === 0){
-      setPasswordError('Mật khẩu không hợp lệ');
-    }else{
-      setPasswordError('');
-    }
-  };
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   // hàm kích hoạt khi bấm nút login
+  const navigate = useNavigate();
+
   const onLogin = (event) => {
-    
-    validateEmail(username)
-    validatePassword(password)
+    const is_email = validateEmail(username, setUsernameError);
+    const is_password = validatePassword(password, setPasswordError);
 
-    if (username.length !== 0 && password.length !== 0){
+    if (is_email && is_password) {
       const data = {
-        email: username,
-        password: password
+        email: username.trim(),
+        password: password,
       };
-  
-      service.AuthServices(data).then(res=>{
-        token.saveAccessToken(res.data.access_token)
-        token.saveRefreshToken(res.data.refresh_token)
 
-      })
-      .catch(error =>{
-        if (error.response.data.msg === "Incorrect password") {
-          setPasswordError('Mật khẩu không đúng');
-        }else{
-          setUsernameError("Email bạn không được đăng kí trong hệ thống");
-        }
-        
-      });
-  
-
+      service
+        .AuthServices(data)
+        .then((res) => {
+          token.saveAccessToken(res.data.access_token);
+          token.saveRefreshToken(res.data.refresh_token);
+          navigate("/");
+        })
+        .catch((error) => {
+          if (error.code === "ERR_NETWORK") {
+            alert(errorMessages["ERR_NETWORK"]);
+          } else {
+            if (error.response.status === 402) {
+              setPasswordError(errorMessages[402]);
+            } else if (error.response.status === 401) {
+              setUsernameError(errorMessages[401]);
+            } else if (error.response.status === 500) {
+              alert(errorMessages[500]);
+            }
+          }
+        });
     }
-
-  };
- 
-  //hàm kích hoạt bấm nút login with gg
-  const onLoginGG = (event) =>{
-    service.AuthServicesGG().then(res =>{
-      window.location.href = res.data.authorization_url ; 
-    }).catch(error  =>{
-      console.error('Error:', error);
-      alert("Thất bại liên kết tài khoản Google");
-    });
-
   };
 
   return (
     <Login
-      onUsernameChange={handleUsernameChange}
-      onPasswordChange={handlePasswordChange}
+      onUsernameChange={(event) => handleUsernameChange(event, setUsername)}
+      onPasswordChange={(event) => handlePasswordChange(event, setPassword)}
       onLogin={onLogin}
-      usernameError = {usernameError} 
-      passwordError = {passwordError}
-      onLoginGG= {onLoginGG}
+      usernameError={usernameError}
+      passwordError={passwordError}
+      onLoginGG={onLoginGG}
     />
   );
 }

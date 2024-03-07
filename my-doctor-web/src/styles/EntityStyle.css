@@ -74,6 +74,7 @@
 .input-wrapper {
   position: relative;
   display: inline-block;
+  
 }
 
 
@@ -84,4 +85,18 @@
   transform: translateY(-50%);
   cursor: pointer;
 }
+
+.custom-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgb(54, 215, 183);
+  opacity: 0.4;
+  border-radius: 50%;
+  animation: 2s linear infinite react-spinners-RingLoader-right;
+  perspective: 800px;
+}
+
 

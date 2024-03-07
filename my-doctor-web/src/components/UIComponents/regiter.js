@@ -14,6 +14,8 @@ function Regiter({
   passwordError,
   passwordErrorVer,
   onLoginGG,
+  isVisible,
+  nameButton,
 }) {
   return (
     <div className="login-container">
@@ -55,50 +57,43 @@ function Regiter({
 
         <div style={{ marginBottom: "15px" }}></div>
 
-        
-          <ButtonCustom
-            type="button"
-            onClick={onRegiter}
-            className="button-singup"
-          >
-            Tạo tài khoản
-          </ButtonCustom>
-      
+        <ButtonCustom
+          type="button"
+          onClick={onRegiter}
+          className="button-singup"
+        >
+          {nameButton}
+        </ButtonCustom>
 
         <div class="separator"></div>
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "7px",
-            width: "100%",
-          }}
-        >
-          <ButtonCustom
-            type="button"
-            onClick={onLoginGG}
-            className="button-link"
-          >
-            <ImageCustom
-              src={process.env.PUBLIC_URL + "/google.png"}
-              alt="Google Logo"
-            />
-            Tiếp tục với Google
-          </ButtonCustom>
+        {isVisible ? (
+          <div className="list_button_link">
+            <ButtonCustom
+              type="button"
+              onClick={onLoginGG}
+              className="button-link"
+            >
+              <ImageCustom
+                src={process.env.PUBLIC_URL + "/google.png"}
+                alt="Google Logo"
+              />
+              Tiếp tục với Google
+            </ButtonCustom>
 
-          <ButtonCustom
-            type="button"
-            onClick={() => console.log("Button clicked")}
-            className="button-link"
-          >
-            <ImageCustom
-              src={process.env.PUBLIC_URL + "/facebook.png"}
-              alt="Facebook Logo"
-            />
-            Tiếp tục với Facebook
-          </ButtonCustom>
-        </div>
+            <ButtonCustom
+              type="button"
+              onClick={() => console.log("Button clicked")}
+              className="button-link"
+            >
+              <ImageCustom
+                src={process.env.PUBLIC_URL + "/facebook.png"}
+                alt="Facebook Logo"
+              />
+              Tiếp tục với Facebook
+            </ButtonCustom>
+          </div>
+        ) : null}
       </FormCustom>
     </div>
   );

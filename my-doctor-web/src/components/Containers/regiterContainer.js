@@ -1,108 +1,95 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Regiter from "../UIComponents/regiter";
-import * as service from "../../services/AuthServices";
+import LoaderCustom from "../../entity/LoaderCustom";
+import { errorMessages } from "../../Config";
+import "../../styles/login.css";
 
+function RegiterContainer({
+  isVisible,
+  nameButton,
+  serviceAPI,
+  router,
+  validateEmail,
+  validatePassword,
+  handleUsernameChange,
+  handlePasswordChange,
+  handlePasswordVerChange,
+  validatePasswordVer,
+  onLoginGG,
+}) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordVer, setPasswordVer] = useState("");
 
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [passwordVerError, setPasswordVerError] = useState("");
 
+  const [loading, setLoading] = useState(false);
 
-function RegiterContainer(){
+  //hàm này khi bấm vào tạo tài khoản
+  const navigate = useNavigate();
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordVer, setPasswordVer] = useState("");
-
-    const [usernameError, setUsernameError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    const [passwordVerError, setPasswordVerError] = useState("");
-
-
-
-    const handleUsernameChange = (event) => {
-        setUsername(event.target.value);
-    };
-
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
-
-    const handlePasswordVerChange = (event) => {
-        setPasswordVer(event.target.value);
-    };
-
-    const validateEmail = (email) => {
-        if(email.length === 0){
-            setUsernameError('Email không hợp lệ');
-            return false;
-        }else{
-            setUsernameError('');
-            return true;
-        }
-    };
-
-    const validatePassword = (password) => {
-        if (password.length === 0){
-            setPasswordError('Mật khẩu không hợp lệ');
-            return false;
-        }else{
-            setPasswordError('');
-            return true;
-        }
-    };
-
-    const validatePasswordVer = (passwordVer , password) => {
-        if (passwordVer.length === 0){
-            setPasswordVerError('Không được bỏ trống');
-            return false;
-        }else if(password !== passwordVer){
-            setPasswordVerError('Mật khẩu không khớp');
-            return false;
-        }
-        else{
-            setPasswordVerError('');
-            return true;
-        }
-    };
-
-
-
-    //hàm này khi bấm vào tạo tài khoản 
-    const navigate = useNavigate();
-
-    const onRegiter = (event) => {
-        const is_email = validateEmail(username);
-        const is_password = validatePassword(password);
-        const is_passwordVer = validatePasswordVer(passwordVer , password);
-
-        if (is_email && is_password && is_passwordVer) {
-            const data = {
-                email: username,
-                password: password
-            };
-
-            service.AuthServicesRegister(data).then(res => {
-                navigate('/vertification_login');
-
-            }).catch(error => {
-                console.log(error);
-                
-            })
-        }
-    };
-
-
-    return(
-        <Regiter
-        onUsernameChange = {handleUsernameChange}
-        onPasswordChange = {handlePasswordChange}
-        onPasswordChangeVer = {handlePasswordVerChange}
-        onRegiter = {onRegiter}
-        usernameError = {usernameError}
-        passwordError = {passwordError}
-        passwordErrorVer = {passwordVerError}
-        onLoginGG = {() => {}}
-        />
+  const onRegiter = (event) => {
+    const is_email = validateEmail(username, setUsernameError);
+    const is_password = validatePassword(password, setPasswordError);
+    const is_passwordVer = validatePasswordVer(
+      passwordVer,
+      password,
+      setPasswordVerError
     );
+
+    if (is_email && is_password && is_passwordVer) {
+      setLoading(true);
+
+      const data = {
+        email: username.trim(),
+        password: password,
+      };
+
+      serviceAPI(data)
+        .then((res) => {
+          setLoading(false);
+          navigate(router);
+        })
+        .catch((error) => {
+          setLoading(false);
+          if (error.code === "ERR_NETWORK") {
+            alert(errorMessages["ERR_NETWORK"]);
+          } else {
+            alert(errorMessages[error.response.status]);
+          }
+        });
+    }
+  };
+
+  return (
+    <>
+      {loading ? (
+        <div className="spinner-container">
+          <LoaderCustom loading={loading} />
+        </div>
+      ) : null}
+
+      <div className={loading ? "blurred" : "page-container"}>
+        <Regiter
+          onUsernameChange={(event) => handleUsernameChange(event, setUsername)}
+          onPasswordChange={(event) => handlePasswordChange(event, setPassword)}
+          onPasswordChangeVer={(event) =>
+            handlePasswordVerChange(event, setPasswordVer)
+          }
+          onRegiter={onRegiter}
+          usernameError={usernameError}
+          passwordError={passwordError}
+          passwordErrorVer={passwordVerError}
+          onLoginGG={onLoginGG}
+          isVisible={isVisible}
+          nameButton={nameButton}
+        />
+      </div>
+    </>
+  );
 }
 
 export default RegiterContainer;

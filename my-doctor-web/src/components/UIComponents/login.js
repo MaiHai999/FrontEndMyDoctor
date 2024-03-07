@@ -50,7 +50,7 @@ function Login({
         </ButtonCustom>
 
         <div style={{ margin: "10px" }}>
-          <ACustom href="https://www.example.com" linkText="Quên mật khẩu?" />
+          <ACustom href="/reset_password" linkText="Quên mật khẩu?" />
         </div>
 
         <div style={{ width: "100%" }}>
@@ -67,14 +67,7 @@ function Login({
 
         <div class="separator"></div>
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "7px",
-            width: "100%",
-          }}
-        >
+        <div className="list_button_link">
           <ButtonCustom
             type="button"
             onClick={onLoginGG}

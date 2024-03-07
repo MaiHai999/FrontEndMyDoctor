@@ -17,6 +17,18 @@ export function AuthServicesRegister(data){
     return axios.post(url.url_register,data);
 }
 
+export function AuthServicesVertificationRegister(data){
+    return axios.post(url.url_vertification_register,data);
+}
+
+
+export function AuthServicesResetPassWord(data){
+    return axios.post(url.url_reset_password,data);
+}
+
+export function AuthServicesVertificationResetPassword(data){
+    return axios.post(url.url_vertification_reset,data);
+}
 
 
 export function AuthServicesCallBackGG(url){
