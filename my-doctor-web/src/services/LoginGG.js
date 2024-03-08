@@ -4,6 +4,7 @@ import * as token from "../entity/HandleToken";
 import { errorMessages } from "../Config";
 
 export function CallbackGG() {
+  console.log("                    vo dươc day              1");
   const pathname = window.location.pathname;
   if (pathname === "/callback") {
     const urlParams = new URLSearchParams(window.location.search);
@@ -18,11 +19,13 @@ export function CallbackGG() {
         window.location.href = "/";
       })
       .catch((error) => {
+        console.log("                    vo dươc day              2");
         if (error.code === "ERR_NETWORK") {
           alert(errorMessages["ERR_NETWORK"]);
         } else {
           alert(errorMessages[error.response.status]);
         }
+        console.log("                    vo dươc day              3");
         window.location.href = "/login";
       });
   }

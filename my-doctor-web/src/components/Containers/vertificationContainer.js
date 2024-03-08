@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Vertification from "../UIComponents/vertification";
+import { errorMessages } from "../../Config";
+
+
 
 function VertificationContainer({ vertification }) {
   const [token, setToken] = useState("");
@@ -29,7 +32,7 @@ function VertificationContainer({ vertification }) {
 
     if (is_token) {
       const data = {
-        token: token,
+        token: token.trim(),
       };
 
       vertification(data)
@@ -38,7 +41,12 @@ function VertificationContainer({ vertification }) {
           navigate("/login");
         })
         .catch((error) => {
-          alert("Xác thực thất bại!");
+          if (error.code === "ERR_NETWORK") {
+            alert(errorMessages["ERR_NETWORK"]);
+          } else {
+            alert(errorMessages[error.response.status]);
+          }
+
         });
     }
   };

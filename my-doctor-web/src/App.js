@@ -62,6 +62,13 @@ function App() {
             nameButton={"Lấy lại mật khẩu"}
             serviceAPI={service.AuthServicesResetPassWord}
             router={"/vertification_reset"}
+            validateEmail={validation.validateEmail}
+            validatePassword={validation.validatePassword}
+            validatePasswordVer={validation.validatePasswordVer}
+            handleUsernameChange = {validation.handleUsernameChange}
+            handlePasswordChange={validation.handlePasswordChange}
+            handlePasswordVerChange={validation.handlePasswordVerChange}
+            onLoginGG={loginGG.OnLoginGG}
           />
         }
       />

@@ -22,6 +22,8 @@ export const errorMessages = {
     403 : "Người dùng không được xác thực.",
     404 : "Email đã được đăng kí bằng hình thức nhập email và mật khẩu nên bạn không thể tiếp tục bằng liên kết Google này.Vui lòng nhập đúng mật khẩu cho email này hoặc bạn có thể bấm quên mật khẩu để lấy lại mật khẩu. ",
     405 : "Email đã được đăng kí ở hệ thống.",
+    406 : "Mã xác thực của bạn không hợp lệ",
+    407 : "Email của bạn không tồn tại trong hệ thống của chúng tôi",
     500 : "Hệ thống chúng tôi gặp sự cố vui lòng quay lại say ít phút.Chúng tôi rất làm tiếc cho sự cố này !"
 
     
