@@ -25,6 +25,7 @@
   transition: background-color 0.3s ease;
   font-weight: bold;
   font-size: 19px; 
+  height: auto;
 
   /* Định dạng khi rê chuột vào button */
   &:hover {
@@ -51,7 +52,7 @@
   border-radius: 8px; /* Bo tròn góc của form */
   transform: translateY(0%);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Tạo bóng đổ màu đen nhạt */
-
+  transform: scale(0.85);
 }
 
 
