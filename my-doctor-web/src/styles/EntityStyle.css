@@ -101,3 +101,29 @@
 }
 
 
+.custom-li {
+  width: 100%;
+  color: rgb(9, 0, 0);
+  height: 30px;
+
+  
+}
+
+.icon-delete {
+  height: 15px;
+  width: 15px;
+
+}
+
+.icon-delete:hover {
+  color: red; 
+}
+
+.ol-style{
+  list-style: none;
+  padding-left: 0;
+}
+
+.ol-style li {
+  border-bottom: 1px solid #e1cfcf; 
+}

@@ -1,10 +1,13 @@
 
+import ConversationContainer from "../Containers/conversationContainer";
+import MessageContainer from "../Containers/messageContainer";
+import "../../styles/main.css";
 
 function MainUI() {
   return (
-    <div>
-      <h1> hello</h1>
-      <h2> clmmmasjdnfn </h2>
+    <div className="main-style">
+      <ConversationContainer />
+      <MessageContainer/>
     </div>
   );
 }
