@@ -1,23 +1,19 @@
-import "../styles/EntityStyle.css";
-import { MdDeleteForever } from "react-icons/md";
-
-
-
-
-
-
+import "../styles/conversation.css";
+import { MdOutlineClear } from "react-icons/md";
 
 
 
 function LiCustom({ index, content, handleDelete }) {
   return (
-    <li key={index} className="custom-li">
-      {content}
+    <div className="outner-li">
+      <li key={index} className="custom-li">
+        <div className="inner-content-li">{content}</div>
 
-      <button className="icon-delete" onClick={handleDelete} aria-label="Xoá">
-        <MdDeleteForever />
-      </button>
-    </li>
+        <button className="icon-delete" onClick={(event) => { handleDelete(); }} aria-label="Xoá">
+          <MdOutlineClear />
+        </button>
+      </li>
+    </div>
   );
 }
 

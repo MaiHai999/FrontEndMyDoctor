@@ -1,8 +1,107 @@
-
-
-
 .conversation-style {
-    background-color: rgb(241, 245, 249); 
-    width: 390px;
+  background-color: rgb(36, 37, 38);
+  width: 325px;
+  border-right: 1px solid rgb(47, 48, 49);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-  
+
+.custom-li {
+  width: 100%;
+  color: rgb(255, 255, 255);
+  height: 30px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  justify-content: space-between;
+}
+
+.inner-content-li {
+  margin-left: 10px;
+}
+
+.outner-li {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+.custom-li:hover {
+  background-color: rgb(58, 59, 60);
+  cursor: pointer;
+}
+
+.custom-li:active {
+  background-color: rgb(38, 46, 58);
+}
+
+.icon-delete {
+  background-color: inherit;
+  color: #fff;
+  padding-right: 10px;
+  border: 8px;
+  cursor: pointer;
+  font-size: 13px; 
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.icon-delete:hover {
+  color: rgb(121, 117, 117);
+}
+
+
+
+.ol-style {
+  list-style: none;
+  padding-left: 0;
+}
+
+.border-ol {
+  border-top: 1px solid rgb(47, 48, 49);
+  margin-bottom: auto;
+}
+
+.style-title {
+  color: white;
+}
+
+.container-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.button-add {
+  background-color: rgb(67, 72, 80);
+  border: 1px solid rgb(85, 90, 97);
+  font-size: 10px;
+  padding: 5px;
+  padding-left: 9px;
+  padding-right: 9px;
+}
+
+.button-add:hover {
+  background-color: rgb(60, 60, 60);
+}
+
+.footer {
+  border-top: 1px solid rgb(47, 48, 49);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+
+.footer1{
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

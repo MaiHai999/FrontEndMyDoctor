@@ -101,29 +101,30 @@
 }
 
 
-.custom-li {
-  width: 100%;
-  color: rgb(9, 0, 0);
+.rounded-sm {
+  border-radius: 0.9rem; 
+  color: transparent;
+  width: 30px;
   height: 30px;
-
-  
 }
 
-.icon-delete {
-  height: 15px;
-  width: 15px;
-
+.custom-button-user{
+  background-color: inherit;
+  color: #fff;
+  padding: 10px 10px;
+  font-size: 16px;
+  border: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 13px; 
+  text-align: left; 
+  width: 305px;
+  display: flex;
+  align-items: center;
 }
 
-.icon-delete:hover {
-  color: red; 
-}
 
-.ol-style{
-  list-style: none;
-  padding-left: 0;
-}
-
-.ol-style li {
-  border-bottom: 1px solid #e1cfcf; 
+.custom-button-user:hover {
+  background-color: rgb(60, 60, 60);
 }

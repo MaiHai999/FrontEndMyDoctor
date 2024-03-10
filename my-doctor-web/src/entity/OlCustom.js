@@ -1,4 +1,4 @@
-import "../styles/EntityStyle.css";
+import "../styles/conversation.css";
 import LiCustom from "./LiCustom";
 
 function OlCustom(props) {
