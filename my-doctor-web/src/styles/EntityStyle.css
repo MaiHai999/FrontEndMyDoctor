@@ -128,3 +128,20 @@
   font-size: 19px;
   margin-right: 2px; 
 }
+
+
+.input-message-style{
+  padding: 17px;
+  font-size: 15px;
+  border: 1px solid rgb(57,62,75);
+  border-radius: 8px; 
+  background-color: rgb(57,62,75); 
+  width: 100%; 
+  box-sizing: border-box; 
+  color: white;
+}
+
+.input-message-style:focus {
+  border-color: rgb(116, 115, 115); 
+  outline: 2px solid rgb(79, 79, 83);
+}

@@ -1,6 +1,9 @@
 import "../../styles/message.css";
+import InputMessage from "../../entity/InputMessage";
 
-function Message() {
+
+
+function Message({handleKeyPress}) {
   return (
     <div className="message-style">
       <div className="header-style">
@@ -19,7 +22,7 @@ function Message() {
       </div>
 
       <div className="footer-style">
-        <h3> fotter nhé </h3>
+        <InputMessage handleKeyPress={handleKeyPress}/>
       </div>
     </div>
   );
