@@ -3,13 +3,16 @@ import { MdOutlineClear } from "react-icons/md";
 
 
 
-function LiCustom({ index, content, handleDelete }) {
+function LiCustom(props) {
+  const { index, content, handleDelete , isActive , handleInnerContentClick} = props;
+
   return (
     <div className="outner-li">
-      <li key={index} className="custom-li">
-        <div className="inner-content-li">{content}</div>
 
-        <button className="icon-delete" onClick={(event) => { handleDelete(); }} aria-label="Xoá">
+      <li key={index} className={isActive ? "custom-li-active" : "custom-li"} >
+        <div className="inner-content-li" onMouseDown={handleInnerContentClick} >{content}</div>
+
+        <button className="icon-delete" onClick={handleDelete} aria-label="Xoá">
           <MdOutlineClear />
         </button>
       </li>

@@ -1,6 +1,8 @@
 import "../styles/EntityStyle.css";
+import { IoIosLogOut } from "react-icons/io";
 
-function ButtonAccount(props) {
+
+function ButtonLogout(props) {
   const { type, onClick, children, className } = props;
 
   return (
@@ -9,10 +11,10 @@ function ButtonAccount(props) {
       onClick={onClick}
       className={`custom-button-user ${className}`}
     >
-      <img src={process.env.PUBLIC_URL + "/logo.jpg"} className="rounded-sm" />
+      <IoIosLogOut className="logout-icon-style"/>
       <div style={{marginLeft : "5px"}}>{children}</div>
     </button>
   );
 }
 
-export default ButtonAccount;
+export default ButtonLogout;

@@ -1,11 +1,11 @@
 import "../../styles/conversation.css";
 import OlCustom from "../../entity/OlCustom";
 import ButtonCustom from "../../entity/ButtonCustom";
-import ButtonAccount from "../../entity/ButtonAccount";
+import ButtonLogout from "../../entity/ButtonLogout";
 
 function Conversation() {
-  const onDelete = () => {
-    console.log("okla");
+  const onDelete = (index) => {
+    console.log(index);
   };
 
   const items = ["Item 1", "Item 2", "It456789"];
@@ -28,10 +28,10 @@ function Conversation() {
 
       <div className="footer">
         <div className="footer1">
-          <ButtonAccount
+          <ButtonLogout
             type="button"
             onClick={() => console.log("Button clicked")}
-            children="Mai Hai"
+            children="Đăng xuất"
           />
         </div>
       </div>

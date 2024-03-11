@@ -101,13 +101,6 @@
 }
 
 
-.rounded-sm {
-  border-radius: 0.9rem; 
-  color: transparent;
-  width: 30px;
-  height: 30px;
-}
-
 .custom-button-user{
   background-color: inherit;
   color: #fff;
@@ -122,9 +115,16 @@
   width: 305px;
   display: flex;
   align-items: center;
+  font-weight: bold;
 }
 
 
 .custom-button-user:hover {
-  background-color: rgb(60, 60, 60);
+  background-color: rgb(60,60,60);
+}
+
+
+.logout-icon-style {
+  font-size: 19px;
+  margin-right: 2px; 
 }
