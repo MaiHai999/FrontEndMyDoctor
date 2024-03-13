@@ -101,7 +101,7 @@
 }
 
 
-.custom-button-user{
+.custom-button-logout{
   background-color: inherit;
   color: #fff;
   padding: 10px 10px;
@@ -112,14 +112,14 @@
   transition: background-color 0.3s ease;
   font-size: 13px; 
   text-align: left; 
-  width: 305px;
+  width: 100%;
   display: flex;
   align-items: center;
   font-weight: bold;
 }
 
 
-.custom-button-user:hover {
+.custom-button-logout:hover {
   background-color: rgb(60,60,60);
 }
 
@@ -145,3 +145,4 @@
   border-color: rgb(116, 115, 115); 
   outline: 2px solid rgb(79, 79, 83);
 }
+

@@ -13,6 +13,8 @@ export const url_login_callback_gg = "http://127.0.0.1:9999/auth/callback";
 export const url_reset_password = "http://127.0.0.1:9999/auth/reset_password";
 export const url_vertification_reset = "http://127.0.0.1:9999/auth/vertification_reset";
 
+export const url_get_conversation = "http://127.0.0.1:9999/mess/conversation";
+
 
 // đối tượng mã lỗi
 export const errorMessages = {
@@ -24,6 +26,8 @@ export const errorMessages = {
     405 : "Email đã được đăng kí ở hệ thống.",
     406 : "Mã xác thực của bạn không hợp lệ",
     407 : "Email của bạn không tồn tại trong hệ thống của chúng tôi",
+    428 : "Hết phiên làm việc",
+    429 : "Quá nhiều yêu cầu xử lý trong một lúc",
     500 : "Hệ thống chúng tôi gặp sự cố vui lòng quay lại say ít phút.Chúng tôi rất làm tiếc cho sự cố này !"
 
     

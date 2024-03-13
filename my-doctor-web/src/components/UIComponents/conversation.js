@@ -3,12 +3,9 @@ import OlCustom from "../../entity/OlCustom";
 import ButtonCustom from "../../entity/ButtonCustom";
 import ButtonLogout from "../../entity/ButtonLogout";
 
-function Conversation() {
-  const onDelete = (index) => {
-    console.log(index);
-  };
 
-  const items = ["Item 1", "Item 2", "It456789"];
+function Conversation(props) {
+  const { onDelete, items } = props;
 
   return (
     <div className="conversation-style">

@@ -9,7 +9,7 @@ function ButtonLogout(props) {
     <button
       type={type}
       onClick={onClick}
-      className={`custom-button-user ${className}`}
+      className={`custom-button-logout ${className}`}
     >
       <IoIosLogOut className="logout-icon-style"/>
       <div style={{marginLeft : "5px"}}>{children}</div>

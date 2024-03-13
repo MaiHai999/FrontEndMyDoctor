@@ -1,6 +1,6 @@
 .conversation-style {
   background-color: rgb(36,37,38);
-  width: 325px;
+  width: 30%;
   border-right: 1px solid rgb(47, 48, 49);
   display: flex;
   flex-direction: column;
@@ -108,6 +108,7 @@
 .footer {
   border-top: 1px solid rgb(47, 48, 49);
   color: white;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -120,4 +121,5 @@
     margin-left: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    width: 100%;
 }
