@@ -13,3 +13,13 @@ export function MessServicesGetConversation(){
         }
     });
 }
+
+
+export function MessServicesDelConversation(){
+    const token = hand_token.getAccessToken();
+    return axios.get(url.url_get_conversation, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+}
