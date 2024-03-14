@@ -5,7 +5,7 @@ import ButtonLogout from "../../entity/ButtonLogout";
 
 
 function Conversation(props) {
-  const { onDelete, items } = props;
+  const { onDelete, items , onLogout , onNewchat } = props;
 
   return (
     <div className="conversation-style">
@@ -13,7 +13,7 @@ function Conversation(props) {
         <h3 className="style-title">Đoạn chat</h3>
         <ButtonCustom
           type="button"
-          onClick={() => console.log("Button clicked")}
+          onClick={onNewchat}
           className="button-add"
           children="+ New Chat"
         />
@@ -27,7 +27,7 @@ function Conversation(props) {
         <div className="footer1">
           <ButtonLogout
             type="button"
-            onClick={() => console.log("Button clicked")}
+            onClick={onLogout}
             children="Đăng xuất"
           />
         </div>

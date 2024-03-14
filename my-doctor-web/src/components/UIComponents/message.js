@@ -1,8 +1,9 @@
 import "../../styles/message.css";
 import InputMessage from "../../entity/InputMessage";
 import MessageLine from "../../entity/MessageLine";
+import Introduce from "./introduce";
 
-function Message({ handleKeyPress }) {
+function Message({ handleKeyPress, isIntro }) {
   return (
     <div className="message-style">
       <div className="header-style">
@@ -16,17 +17,22 @@ function Message({ handleKeyPress }) {
       </div>
 
       <div className="body-style">
-        <MessageLine
-          imageUrl={process.env.PUBLIC_URL + "/logo.jpg"}
-          content={"hi"}
-          isAI={false}
-        />
-
-        <MessageLine
-          imageUrl={process.env.PUBLIC_URL + "/logo.jpg"}
-          content={"bạn khoẻ chứ "}
-          isAI={true}
-        />
+        {isIntro ? (
+          <Introduce />
+        ) : (
+          <>
+            <MessageLine
+              imageUrl={process.env.PUBLIC_URL + "/logo.jpg"}
+              content={"hi"}
+              isAI={false}
+            />
+            <MessageLine
+              imageUrl={process.env.PUBLIC_URL + "/logo.jpg"}
+              content={"bạn khoẻ chứ "}
+              isAI={true}
+            />{" "}
+          </>
+        )}
       </div>
 
       <div className="footer-style">

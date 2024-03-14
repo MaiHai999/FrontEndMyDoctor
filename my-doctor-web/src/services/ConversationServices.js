@@ -15,11 +15,22 @@ export function MessServicesGetConversation(){
 }
 
 
-export function MessServicesDelConversation(){
+export function MessServicesDelConversation(id_conversation){
     const token = hand_token.getAccessToken();
-    return axios.get(url.url_get_conversation, {
+    return axios.get(`${url.url_del_conversation}?id_conversation=${id_conversation}`, {
         headers: {
             Authorization: `Bearer ${token}`
         }
     });
 }
+
+
+export function ServicesLogout(){
+    const token = hand_token.getAccessToken();
+    return axios.get(url.url_logout, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+}
+

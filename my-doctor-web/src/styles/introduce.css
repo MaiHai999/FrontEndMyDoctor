@@ -1,0 +1,28 @@
+
+
+
+.logo-style{
+    margin-bottom: 2px; 
+    border-radius: 9rem; 
+    color: transparent;
+    width: 40px;
+    height: 40px;
+
+
+}
+
+
+.intro-style{
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    height: 100%;
+
+}
+
+.title-style-intro{
+    padding: 2px;
+    font-size: 15px;
+    font-weight: 250;
+}
