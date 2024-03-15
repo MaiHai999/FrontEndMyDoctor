@@ -17,6 +17,8 @@ export const url_vertification_reset = "http://127.0.0.1:9999/auth/vertification
 export const url_get_conversation = "http://127.0.0.1:9999/mess/conversation";
 export const url_del_conversation = "http://127.0.0.1:9999/mess/del_con";
 
+export const url_get_message = "http://127.0.0.1:9999/mess/message";
+
 
 
 // đối tượng mã lỗi

@@ -3,7 +3,10 @@ import InputMessage from "../../entity/InputMessage";
 import MessageLine from "../../entity/MessageLine";
 import Introduce from "./introduce";
 
-function Message({ handleKeyPress, isIntro }) {
+function Message(props) {
+  const {handleKeyPress, isIntro , messages} = props;
+
+
   return (
     <div className="message-style">
       <div className="header-style">
@@ -21,16 +24,20 @@ function Message({ handleKeyPress, isIntro }) {
           <Introduce />
         ) : (
           <>
-            <MessageLine
-              imageUrl={process.env.PUBLIC_URL + "/logo.jpg"}
-              content={"hi"}
-              isAI={false}
-            />
-            <MessageLine
-              imageUrl={process.env.PUBLIC_URL + "/logo.jpg"}
-              content={"bạn khoẻ chứ "}
-              isAI={true}
-            />{" "}
+            {messages.map((message) => (
+              <>
+                <MessageLine
+                  imageUrl={process.env.PUBLIC_URL + "/logo.jpg"}
+                  content={message.human}
+                  isAI={false}
+                />
+                <MessageLine
+                  imageUrl={process.env.PUBLIC_URL + "/logo.jpg"}
+                  content={message.ai}
+                  isAI={true}
+                />
+              </>
+            ))}
           </>
         )}
       </div>

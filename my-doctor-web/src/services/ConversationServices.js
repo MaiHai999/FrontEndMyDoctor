@@ -24,6 +24,16 @@ export function MessServicesDelConversation(id_conversation){
     });
 }
 
+export function MessServicesGetMess(id_conversation){
+    const token = hand_token.getAccessToken();
+    return axios.get(`${url.url_get_message}?id_conversation=${id_conversation}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+}
+
+
 
 export function ServicesLogout(){
     const token = hand_token.getAccessToken();

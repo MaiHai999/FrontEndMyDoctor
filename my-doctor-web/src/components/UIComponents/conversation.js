@@ -3,9 +3,9 @@ import OlCustom from "../../entity/OlCustom";
 import ButtonCustom from "../../entity/ButtonCustom";
 import ButtonLogout from "../../entity/ButtonLogout";
 
-
 function Conversation(props) {
-  const { onDelete, items , onLogout , onNewchat } = props;
+  const { onDelete, items, onLogout, onNewchat, handleLiClick , activeIndex } = props;
+
 
   return (
     <div className="conversation-style">
@@ -20,16 +20,17 @@ function Conversation(props) {
       </div>
 
       <div className="border-ol">
-        <OlCustom items={items} onDelete={onDelete} />
+        <OlCustom
+          items={items}
+          onDelete={onDelete}
+          handleLiClick={handleLiClick}
+          activeIndex = {activeIndex}
+        />
       </div>
 
       <div className="footer">
         <div className="footer1">
-          <ButtonLogout
-            type="button"
-            onClick={onLogout}
-            children="Đăng xuất"
-          />
+          <ButtonLogout type="button" onClick={onLogout} children="Đăng xuất" />
         </div>
       </div>
     </div>
