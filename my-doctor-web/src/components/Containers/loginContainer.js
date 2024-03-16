@@ -35,6 +35,7 @@ function LoginContainer({
         .then((res) => {
           token.saveAccessToken(res.data.access_token);
           token.saveRefreshToken(res.data.refresh_token);
+          localStorage.setItem('username', res.data.user_name);
           navigate("/");
         })
         .catch((error) => {

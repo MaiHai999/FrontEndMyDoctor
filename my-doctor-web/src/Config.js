@@ -19,6 +19,11 @@ export const url_del_conversation = "http://127.0.0.1:9999/mess/del_con";
 
 export const url_get_message = "http://127.0.0.1:9999/mess/message";
 
+const username = localStorage.getItem("username");
+export const url_get_avatar = "https://ui-avatars.com/api/?name=" + username;
+
+
+
 
 
 // đối tượng mã lỗi

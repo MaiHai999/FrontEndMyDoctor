@@ -2,21 +2,17 @@ import "../../styles/message.css";
 import InputMessage from "../../entity/InputMessage";
 import MessageLine from "../../entity/MessageLine";
 import Introduce from "./introduce";
+import * as url from "../../Config";
 
 function Message(props) {
-  const {handleKeyPress, isIntro , messages} = props;
-
+  const { handleKeyPress, isIntro, messages } = props;
 
   return (
     <div className="message-style">
       <div className="header-style">
         <h3 className="title-style"> My Doctor Plus </h3>
 
-        <img
-          src={process.env.PUBLIC_URL + "/logo.jpg"}
-          alt="logo-user"
-          className="rounded-sm"
-        />
+        <img src={url.url_get_avatar} alt="logo-user" className="rounded-sm" />
       </div>
 
       <div className="body-style">
@@ -27,7 +23,7 @@ function Message(props) {
             {messages.map((message) => (
               <>
                 <MessageLine
-                  imageUrl={process.env.PUBLIC_URL + "/logo.jpg"}
+                  imageUrl={url.url_get_avatar}
                   content={message.human}
                   isAI={false}
                 />

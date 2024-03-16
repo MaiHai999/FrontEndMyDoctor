@@ -25,6 +25,9 @@ function MainContainer() {
           .MessServicesGetConversation()
           .then((res) => {
             setItems(res.data.map((item) => [item.id, item.title]));
+            if(index === activeIndex){
+              setIsIntro(true);
+            }
           })
           .catch((error) => {
             if (error.code === "ERR_NETWORK") {
