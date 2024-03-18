@@ -12,7 +12,7 @@ function Message(props) {
       <div className="header-style">
         <h3 className="title-style"> My Doctor Plus </h3>
 
-        <img src={url.url_get_avatar} alt="logo-user" className="rounded-sm" />
+        <img src={url.url_get_avatar} alt="logo-user" className="rounded-sm" title={url.username} />
       </div>
 
       <div className="body-style">

@@ -6,12 +6,13 @@ import * as callAPI from "../../services/ConversationServices";
 import { errorMessages } from "../../Config";
 import "../../styles/main.css";
 
+
+
 function MainContainer() {
   const [isIntro, setIsIntro] = useState(true);
   const [messages, setMessages] = useState([]);
   const [items, setItems] = useState([]);
   const [activeIndex, setActiveIndex] = useState(-1);
-
 
   // hàm kích hoạt khi bấm nút login
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ function MainContainer() {
           .MessServicesGetConversation()
           .then((res) => {
             setItems(res.data.map((item) => [item.id, item.title]));
-            if(index === activeIndex){
+            if (index === activeIndex) {
               setIsIntro(true);
             }
           })
@@ -85,16 +86,30 @@ function MainContainer() {
   };
 
   //hàm này bấm enter
-  const onEnter = (event) => {
+  const onEnter = (event, setMessage) => {
     if (event.key === "Enter") {
-      setIsIntro(false);
+      const text = event.target.value;
+      if (text.trim().length > 0) {
+        event.preventDefault();
+        setIsIntro(false);
+        setMessage("");
+        callAPI.fetchData(text);
+
+      }
     }
   };
+
+
+
+
+
+  
 
   //hàm này nhấn vào
   const handleLiClick = (index) => {
     setActiveIndex(index);
-    callAPI.MessServicesGetMess(index)
+    callAPI
+      .MessServicesGetMess(index)
       .then((res) => {
         setIsIntro(false);
         setMessages(res.data);
@@ -116,7 +131,7 @@ function MainContainer() {
         onLogout={onLogout}
         onNewchat={onNewchat}
         handleLiClick={handleLiClick}
-        activeIndex = {activeIndex}
+        activeIndex={activeIndex}
       />
       <Message handleKeyPress={onEnter} isIntro={isIntro} messages={messages} />
     </div>

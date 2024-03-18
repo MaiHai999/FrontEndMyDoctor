@@ -18,8 +18,9 @@ export const url_get_conversation = "http://127.0.0.1:9999/mess/conversation";
 export const url_del_conversation = "http://127.0.0.1:9999/mess/del_con";
 
 export const url_get_message = "http://127.0.0.1:9999/mess/message";
+export const url_chat = "http://127.0.0.1:9999/mess/chat";
 
-const username = localStorage.getItem("username");
+export const username = localStorage.getItem("username");
 export const url_get_avatar = "https://ui-avatars.com/api/?name=" + username;
 
 
