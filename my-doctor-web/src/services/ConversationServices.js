@@ -44,32 +44,3 @@ export function ServicesLogout() {
   });
 }
 
-export const fetchData = async (message) => {
-    try {
-      const token = hand_token.getAccessToken();
-
-      const response = await fetch(`${url.url_chat}?human=${message}` , {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      if (!response.ok || !response.body) {
-        throw response.statusText;
-      }
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) {
-          break;
-        }
-
-        const decodedChunk = decoder.decode(value, { stream: true });
-        console.log(decodedChunk);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };

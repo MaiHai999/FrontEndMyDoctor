@@ -5,8 +5,8 @@ import Message from "../UIComponents/message";
 import * as callAPI from "../../services/ConversationServices";
 import { errorMessages } from "../../Config";
 import "../../styles/main.css";
-
-
+import * as url from "../../Config";
+import * as hand_token from "../../entity/HandleToken";
 
 function MainContainer() {
   const [isIntro, setIsIntro] = useState(true);
@@ -93,17 +93,52 @@ function MainContainer() {
         event.preventDefault();
         setIsIntro(false);
         setMessage("");
-        callAPI.fetchData(text);
-
+        // callAPI.fetchData(text);
+        fetchData(text);
       }
     }
   };
 
+  const fetchData = async (message) => {
+    try {
+      const newMessage = { human: message, ai: "" };
+      let updatedMessages = [...messages, newMessage];
+      setMessages(updatedMessages);
+      const lastMessage = updatedMessages[updatedMessages.length - 1];
 
+      const token = hand_token.getAccessToken();
+      const response = await fetch(`${url.url_chat}?human=${message}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok || !response.body) {
+        throw response.statusText;
+      }
 
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
 
+      let data = "";
 
-  
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) {
+          break;
+        }
+
+        const decodedChunk = decoder.decode(value, { stream: true });
+        data = data + decodedChunk;
+        lastMessage.ai = data;
+        updatedMessages = [...updatedMessages]; 
+        setMessages(updatedMessages);
+      }
+    } catch (error) {
+      console.log(error);
+    }finally{
+      console.log("cuoi cung nhé");
+    }
+  };
 
   //hàm này nhấn vào
   const handleLiClick = (index) => {
