@@ -44,3 +44,15 @@ export function ServicesLogout() {
   });
 }
 
+export function MessServicesSave(id_conversation , human , ai) {
+  const token = hand_token.getAccessToken();
+  return axios.get(
+    `${url.url_save}?id_conversation=${id_conversation}&human=${human}&ai=${ai}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+}
+

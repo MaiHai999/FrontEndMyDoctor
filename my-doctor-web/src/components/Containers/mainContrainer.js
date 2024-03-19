@@ -47,8 +47,7 @@ function MainContainer() {
       });
   };
 
-  // call API
-  useEffect(() => {
+  const renderItem = () => {
     callAPI
       .MessServicesGetConversation()
       .then((res) => {
@@ -61,6 +60,11 @@ function MainContainer() {
           alert(errorMessages[error.response.status]);
         }
       });
+  };
+
+  // call API
+  useEffect(() => {
+    renderItem();
   }, []);
 
   //hàm logout
@@ -100,6 +104,8 @@ function MainContainer() {
   };
 
   const fetchData = async (message) => {
+    let data = "";
+
     try {
       const newMessage = { human: message, ai: "" };
       let updatedMessages = [...messages, newMessage];
@@ -119,8 +125,6 @@ function MainContainer() {
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
 
-      let data = "";
-
       while (true) {
         const { value, done } = await reader.read();
         if (done) {
@@ -130,13 +134,29 @@ function MainContainer() {
         const decodedChunk = decoder.decode(value, { stream: true });
         data = data + decodedChunk;
         lastMessage.ai = data;
-        updatedMessages = [...updatedMessages]; 
+        updatedMessages = [...updatedMessages];
         setMessages(updatedMessages);
       }
     } catch (error) {
-      console.log(error);
-    }finally{
-      console.log("cuoi cung nhé");
+      if (error.code === "ERR_NETWORK") {
+        alert(errorMessages["ERR_NETWORK"]);
+      } else {
+        alert(errorMessages[error.response.status]);
+      }
+    } finally {
+      callAPI
+        .MessServicesSave(activeIndex, message, data)
+        .then((res) => {
+          renderItem();
+          setActiveIndex(res.data.index);
+        })
+        .catch((error) => {
+          if (error.code === "ERR_NETWORK") {
+            alert(errorMessages["ERR_NETWORK"]);
+          } else {
+            alert(errorMessages[error.response.status]);
+          }
+        });
     }
   };
 
