@@ -51,6 +51,12 @@ function MainContainer() {
     callAPI
       .MessServicesGetConversation()
       .then((res) => {
+        console.log(res.data);
+        res.data.sort((a, b) => {
+          return Date.parse(new Date(b.create_date)) - Date.parse(new Date(a.create_date))
+        });
+
+        console.log(res.data);
         setItems(res.data.map((item) => [item.id, item.title]));
       })
       .catch((error) => {
