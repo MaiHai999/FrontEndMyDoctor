@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Regiter from "../UIComponents/regiter";
 import LoaderCustom from "../../entity/LoaderCustom";
-import { errorMessages } from "../../Config";
+import Validation from "../../entity/ValidationCustom";
 import "../../styles/login.css";
+
 
 function RegiterContainer({
   isVisible,
@@ -55,13 +56,8 @@ function RegiterContainer({
         })
         .catch((error) => {
           setLoading(false);
-          if (error.code === "ERR_NETWORK") {
-            alert(errorMessages["ERR_NETWORK"]);
-          } else if (error.response.status) {
-            alert(errorMessages[error.response.status]);
-          } else {
-            alert(errorMessages[500]);
-          }
+          Validation(error);
+          
         });
     }
   };

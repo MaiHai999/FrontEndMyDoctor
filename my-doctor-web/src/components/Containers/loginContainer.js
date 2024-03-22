@@ -35,22 +35,24 @@ function LoginContainer({
         .then((res) => {
           token.saveAccessToken(res.data.access_token);
           token.saveRefreshToken(res.data.refresh_token);
-          localStorage.setItem('username', res.data.user_name);
+          localStorage.setItem("username", res.data.user_name);
           navigate("/");
         })
         .catch((error) => {
-          if (error.code === "ERR_NETWORK") {
-            alert(errorMessages["ERR_NETWORK"]);
-          } else {
-            if (error.response.status === 402) {
-              setPasswordError(errorMessages[402]);
-            } else if (error.response.status === 401) {
-              setUsernameError(errorMessages[401]);
-            } else if (error.response.status === 500) {
-              alert(errorMessages[500]);
-            } else{
-              alert(errorMessages[500]);
+          try {
+            if (error.code === "ERR_NETWORK") {
+              alert(errorMessages["ERR_NETWORK"]);
+            } else {
+              if (error.response.status === 402) {
+                setPasswordError(errorMessages[402]);
+              } else if (error.response.status === 408) {
+                setUsernameError(errorMessages[408]);
+              } else {
+                alert(errorMessages[500]);
+              }
             }
+          } catch (error) {
+            alert(errorMessages[500]);
           }
         });
     }

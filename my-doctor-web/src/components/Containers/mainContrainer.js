@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Conversation from "../UIComponents/conversation";
 import Message from "../UIComponents/message";
 import * as callAPI from "../../services/ConversationServices";
-import { errorMessages } from "../../Config";
 import "../../styles/main.css";
 import * as url from "../../Config";
 import * as hand_token from "../../entity/HandleToken";
+import Validation from "../../entity/ValidationCustom";
 
 function MainContainer() {
   const [isIntro, setIsIntro] = useState(true);
@@ -32,23 +32,11 @@ function MainContainer() {
             }
           })
           .catch((error) => {
-            if (error.code === "ERR_NETWORK") {
-              alert(errorMessages["ERR_NETWORK"]);
-            } else if (error.response.status) {
-              alert(errorMessages[error.response.status]);
-            } else {
-              alert(errorMessages[500]);
-            }
+            Validation(error);
           });
       })
       .catch((error) => {
-        if (error.code === "ERR_NETWORK") {
-          alert(errorMessages["ERR_NETWORK"]);
-        } else if (error.response.status) {
-          alert(errorMessages[error.response.status]);
-        } else {
-          alert(errorMessages[500]);
-        }
+        Validation(error);
       });
   };
 
@@ -66,13 +54,13 @@ function MainContainer() {
         setItems(res.data.map((item) => [item.id, item.title]));
       })
       .catch((error) => {
-        console.log(error);
-        if (error.code === "ERR_NETWORK") {
-          alert(errorMessages["ERR_NETWORK"]);
-        } else if (error.response.status) {
-          alert(errorMessages[error.response.status]);
-        } else {
-          alert(errorMessages[500]);
+        Validation(error);
+        if (
+          error.hasOwnProperty("response") &&
+          error.response.hasOwnProperty("status") &&
+          error.response.status === 401
+        ) {
+          navigate("/login");
         }
       });
   };
@@ -90,13 +78,7 @@ function MainContainer() {
         navigate("/login");
       })
       .catch((error) => {
-        if (error.code === "ERR_NETWORK") {
-          alert(errorMessages["ERR_NETWORK"]);
-        } else if (error.response.status) {
-          alert(errorMessages[error.response.status]);
-        } else {
-          alert(errorMessages[500]);
-        }
+        Validation(error);
       });
   };
 
@@ -105,6 +87,9 @@ function MainContainer() {
     setIsIntro(true);
     setActiveIndex(-1);
     setMessages([]);
+    if(!isSend){
+      callAPIStop();
+    }
   };
 
   //hàm này bấm enter
@@ -156,8 +141,7 @@ function MainContainer() {
         setMessages(updatedMessages);
       }
     } catch (error) {
-      console.log(error);
-      alert(errorMessages[error.status]);
+      Validation(error);
     } finally {
       // xử lý khi lỗi từ hệ thống mà dữ liệu trả về không lớn hơn không
       setIsSend(true);
@@ -169,22 +153,23 @@ function MainContainer() {
             setActiveIndex(res.data.index);
           })
           .catch((error) => {
-            if (error.code === "ERR_NETWORK") {
-              alert(errorMessages["ERR_NETWORK"]);
-            } else if (
-              "response" in error.response &&
-              "status" in error.response
-            ) {
-              alert(errorMessages[error.response.status]);
-            } else {
-              alert(errorMessages[500]);
-            }
+            Validation(error);
           });
       } else {
         const newMessages = messages.slice(0, -1);
         setMessages(newMessages);
       }
     }
+  };
+
+  // hàm này là dùng để dùng gọi API
+  const callAPIStop = () => {
+    callAPI
+      .MessServicesStop()
+      .then((res) => {})
+      .catch((error) => {
+        Validation(error);
+      });
   };
 
   //hàm này là xử lý bấm send hay stop nhé
@@ -194,24 +179,17 @@ function MainContainer() {
       setMessage("");
       fetchData(message);
     } else if (isSend === false) {
-      callAPI
-        .MessServicesStop()
-        .then((res) => {})
-        .catch((error) => {
-          if (error.code === "ERR_NETWORK") {
-            alert(errorMessages["ERR_NETWORK"]);
-          } else if (error.response.status) {
-            alert(errorMessages[error.response.status]);
-          } else {
-            alert(errorMessages[500]);
-          }
-        });
+      callAPIStop();
     }
   };
 
   //hàm này nhấn vào
   const handleLiClick = (index) => {
     setActiveIndex(index);
+    if(!isSend){
+      callAPIStop();
+    }
+    
     callAPI
       .MessServicesGetMess(index)
       .then((res) => {
@@ -219,13 +197,7 @@ function MainContainer() {
         setMessages(res.data);
       })
       .catch((error) => {
-        if (error.code === "ERR_NETWORK") {
-          alert(errorMessages["ERR_NETWORK"]);
-        } else if (error.response.status) {
-          alert(errorMessages[error.response.status]);
-        } else {
-          alert(errorMessages[500]);
-        }
+        Validation(error);
       });
   };
 
