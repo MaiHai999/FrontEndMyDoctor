@@ -57,8 +57,10 @@ function RegiterContainer({
           setLoading(false);
           if (error.code === "ERR_NETWORK") {
             alert(errorMessages["ERR_NETWORK"]);
-          } else {
+          } else if (error.response.status) {
             alert(errorMessages[error.response.status]);
+          } else {
+            alert(errorMessages[500]);
           }
         });
     }

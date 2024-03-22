@@ -2,24 +2,28 @@
 
 
 // các đường dẫn xuống backend
-export const url_login = "http://127.0.0.1:9999/auth/login";
-export const url_logout = "http://127.0.0.1:9999/auth/logout";
+const url_root =  "http://127.0.0.1:9999"
 
-export const url_register = "http://127.0.0.1:9999/auth/register";
-export const url_vertification_register = "http://127.0.0.1:9999/auth/vertification_register";
+export const url_login = url_root + "/auth/login";
+export const url_logout = url_root + "/auth/logout";
 
-export const url_login_gg = "http://127.0.0.1:9999/auth/login_gg";
-export const url_login_callback_gg = "http://127.0.0.1:9999/auth/callback";
+export const url_register = url_root + "/auth/register";
+export const url_vertification_register = url_root + "/auth/vertification_register";
 
-export const url_reset_password = "http://127.0.0.1:9999/auth/reset_password";
-export const url_vertification_reset = "http://127.0.0.1:9999/auth/vertification_reset";
+export const url_login_gg = url_root + "/auth/login_gg";
+export const url_login_callback_gg = url_root + "/auth/callback";
 
-export const url_get_conversation = "http://127.0.0.1:9999/mess/conversation";
-export const url_del_conversation = "http://127.0.0.1:9999/mess/del_con";
+export const url_reset_password = url_root + "/auth/reset_password";
+export const url_vertification_reset = url_root + "/auth/vertification_reset";
 
-export const url_get_message = "http://127.0.0.1:9999/mess/message";
-export const url_chat = "http://127.0.0.1:9999/mess/chat";
-export const url_save = "http://127.0.0.1:9999/mess/save";
+export const url_get_conversation = url_root + "/mess/conversation";
+export const url_del_conversation = url_root + "/mess/del_con";
+
+export const url_get_message = url_root + "/mess/message";
+export const url_chat = url_root + "/mess/chat";
+export const url_save = url_root + "/mess/save";
+
+export const url_stop = url_root + "/mess/stop";
 
 export const username = localStorage.getItem("username");
 export const url_get_avatar = "https://ui-avatars.com/api/?name=" + username;

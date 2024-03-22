@@ -48,6 +48,8 @@ function LoginContainer({
               setUsernameError(errorMessages[401]);
             } else if (error.response.status === 500) {
               alert(errorMessages[500]);
+            } else{
+              alert(errorMessages[500]);
             }
           }
         });

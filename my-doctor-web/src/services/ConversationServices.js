@@ -56,3 +56,13 @@ export function MessServicesSave(id_conversation , human , ai) {
   );
 }
 
+export function MessServicesStop() {
+  const token = hand_token.getAccessToken();
+  return axios.get(url.url_stop, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+

@@ -13,6 +13,7 @@ function MainContainer() {
   const [messages, setMessages] = useState([]);
   const [items, setItems] = useState([]);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [isSend, setIsSend] = useState(true);
 
   // hàm kích hoạt khi bấm nút login
   const navigate = useNavigate();
@@ -33,16 +34,20 @@ function MainContainer() {
           .catch((error) => {
             if (error.code === "ERR_NETWORK") {
               alert(errorMessages["ERR_NETWORK"]);
-            } else {
+            } else if (error.response.status) {
               alert(errorMessages[error.response.status]);
+            } else {
+              alert(errorMessages[500]);
             }
           });
       })
       .catch((error) => {
         if (error.code === "ERR_NETWORK") {
           alert(errorMessages["ERR_NETWORK"]);
-        } else {
+        } else if (error.response.status) {
           alert(errorMessages[error.response.status]);
+        } else {
+          alert(errorMessages[500]);
         }
       });
   };
@@ -51,19 +56,23 @@ function MainContainer() {
     callAPI
       .MessServicesGetConversation()
       .then((res) => {
-        console.log(res.data);
         res.data.sort((a, b) => {
-          return Date.parse(new Date(b.create_date)) - Date.parse(new Date(a.create_date))
+          return (
+            Date.parse(new Date(b.create_date)) -
+            Date.parse(new Date(a.create_date))
+          );
         });
 
-        console.log(res.data);
         setItems(res.data.map((item) => [item.id, item.title]));
       })
       .catch((error) => {
+        console.log(error);
         if (error.code === "ERR_NETWORK") {
           alert(errorMessages["ERR_NETWORK"]);
-        } else {
+        } else if (error.response.status) {
           alert(errorMessages[error.response.status]);
+        } else {
+          alert(errorMessages[500]);
         }
       });
   };
@@ -83,8 +92,10 @@ function MainContainer() {
       .catch((error) => {
         if (error.code === "ERR_NETWORK") {
           alert(errorMessages["ERR_NETWORK"]);
-        } else {
+        } else if (error.response.status) {
           alert(errorMessages[error.response.status]);
+        } else {
+          alert(errorMessages[500]);
         }
       });
   };
@@ -93,6 +104,7 @@ function MainContainer() {
   const onNewchat = () => {
     setIsIntro(true);
     setActiveIndex(-1);
+    setMessages([]);
   };
 
   //hàm này bấm enter
@@ -101,9 +113,8 @@ function MainContainer() {
       const text = event.target.value;
       if (text.trim().length > 0) {
         event.preventDefault();
-        setIsIntro(false);
         setMessage("");
-        // callAPI.fetchData(text);
+        setIsIntro(false);
         fetchData(text);
       }
     }
@@ -111,6 +122,7 @@ function MainContainer() {
 
   const fetchData = async (message) => {
     let data = "";
+    setIsSend(false);
 
     try {
       const newMessage = { human: message, ai: "" };
@@ -125,7 +137,7 @@ function MainContainer() {
         },
       });
       if (!response.ok || !response.body) {
-        throw response.statusText;
+        throw response;
       }
 
       const reader = response.body.getReader();
@@ -144,23 +156,54 @@ function MainContainer() {
         setMessages(updatedMessages);
       }
     } catch (error) {
-      if (error.code === "ERR_NETWORK") {
-        alert(errorMessages["ERR_NETWORK"]);
-      } else {
-        alert(errorMessages[error.response.status]);
-      }
+      console.log(error);
+      alert(errorMessages[error.status]);
     } finally {
+      // xử lý khi lỗi từ hệ thống mà dữ liệu trả về không lớn hơn không
+      setIsSend(true);
+      if (data.length > 0) {
+        callAPI
+          .MessServicesSave(activeIndex, message, data)
+          .then((res) => {
+            renderItem();
+            setActiveIndex(res.data.index);
+          })
+          .catch((error) => {
+            if (error.code === "ERR_NETWORK") {
+              alert(errorMessages["ERR_NETWORK"]);
+            } else if (
+              "response" in error.response &&
+              "status" in error.response
+            ) {
+              alert(errorMessages[error.response.status]);
+            } else {
+              alert(errorMessages[500]);
+            }
+          });
+      } else {
+        const newMessages = messages.slice(0, -1);
+        setMessages(newMessages);
+      }
+    }
+  };
+
+  //hàm này là xử lý bấm send hay stop nhé
+  const sendStop = (message, setMessage) => {
+    if (message.trim().length > 0 && isSend) {
+      setIsIntro(false);
+      setMessage("");
+      fetchData(message);
+    } else if (isSend === false) {
       callAPI
-        .MessServicesSave(activeIndex, message, data)
-        .then((res) => {
-          renderItem();
-          setActiveIndex(res.data.index);
-        })
+        .MessServicesStop()
+        .then((res) => {})
         .catch((error) => {
           if (error.code === "ERR_NETWORK") {
             alert(errorMessages["ERR_NETWORK"]);
-          } else {
+          } else if (error.response.status) {
             alert(errorMessages[error.response.status]);
+          } else {
+            alert(errorMessages[500]);
           }
         });
     }
@@ -178,8 +221,10 @@ function MainContainer() {
       .catch((error) => {
         if (error.code === "ERR_NETWORK") {
           alert(errorMessages["ERR_NETWORK"]);
-        } else {
+        } else if (error.response.status) {
           alert(errorMessages[error.response.status]);
+        } else {
+          alert(errorMessages[500]);
         }
       });
   };
@@ -194,7 +239,13 @@ function MainContainer() {
         handleLiClick={handleLiClick}
         activeIndex={activeIndex}
       />
-      <Message handleKeyPress={onEnter} isIntro={isIntro} messages={messages} />
+      <Message
+        handleKeyPress={onEnter}
+        isIntro={isIntro}
+        messages={messages}
+        isSend={isSend}
+        sendStopEnvent={sendStop}
+      />
     </div>
   );
 }

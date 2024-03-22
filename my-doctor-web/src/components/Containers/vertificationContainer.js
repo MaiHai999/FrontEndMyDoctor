@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Vertification from "../UIComponents/vertification";
 import { errorMessages } from "../../Config";
 
-
-
 function VertificationContainer({ vertification }) {
   const [token, setToken] = useState("");
   const [tokenError, setTokenError] = useState("");
@@ -22,7 +20,6 @@ function VertificationContainer({ vertification }) {
       return true;
     }
   };
-
 
   // hàm kích hoạt khi nhấn nút
   const navigate = useNavigate();
@@ -43,10 +40,11 @@ function VertificationContainer({ vertification }) {
         .catch((error) => {
           if (error.code === "ERR_NETWORK") {
             alert(errorMessages["ERR_NETWORK"]);
-          } else {
+          } else if (error.response.status) {
             alert(errorMessages[error.response.status]);
+          } else {
+            alert(errorMessages[500]);
           }
-
         });
     }
   };

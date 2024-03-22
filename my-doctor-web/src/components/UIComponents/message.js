@@ -5,14 +5,19 @@ import Introduce from "./introduce";
 import * as url from "../../Config";
 
 function Message(props) {
-  const { handleKeyPress, isIntro, messages } = props;
+  const { handleKeyPress, isIntro, messages, isSend , sendStopEnvent } = props;
 
   return (
     <div className="message-style">
       <div className="header-style">
         <h3 className="title-style"> My Doctor Plus </h3>
 
-        <img src={url.url_get_avatar} alt="logo-user" className="rounded-sm" title={url.username} />
+        <img
+          src={url.url_get_avatar}
+          alt="logo-user"
+          className="rounded-sm"
+          title={url.username}
+        />
       </div>
 
       <div className="body-style">
@@ -39,7 +44,7 @@ function Message(props) {
       </div>
 
       <div className="footer-style">
-        <InputMessage handleKeyPress={handleKeyPress} />
+        <InputMessage handleKeyPress={handleKeyPress} isSend={isSend} sendStopEnvent={sendStopEnvent}/>
       </div>
     </div>
   );

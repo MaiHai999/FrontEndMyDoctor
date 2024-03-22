@@ -139,6 +139,8 @@
   width: 100%; 
   box-sizing: border-box; 
   color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-right: 50px ;
 }
 
 .input-message-style:focus {
@@ -146,3 +148,21 @@
   outline: 2px solid rgb(79, 79, 83);
 }
 
+.button-send-style{
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  height: 50%;
+  color: white;
+}
+
+.icon {
+  font-size: 2.0em; /* Điều chỉnh kích thước của biểu tượng */
+}
+
+.button-send-style:hover{
+  cursor: pointer;
+}

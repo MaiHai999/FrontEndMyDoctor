@@ -95,10 +95,11 @@
   font-size: 14px;
   display: flex;
   align-items: center;
-  margin-right: 50px;
+  margin-right: 75px;
   margin-top: 7px ;
   margin-bottom: 7px;
   text-align: justify;
+  line-height: 1.4;
   
 }
 
