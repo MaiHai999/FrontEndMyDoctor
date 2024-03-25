@@ -85,10 +85,15 @@ function MainContainer() {
   // hàm bấm nút new chat
   const onNewchat = () => {
     setIsIntro(true);
-    setActiveIndex(-1);
+   
     setMessages([]);
     if(!isSend){
       callAPIStop();
+      setTimeout(() => {
+        setActiveIndex(-1);
+      }, 500);
+    }else{
+      setActiveIndex(-1);
     }
   };
 
@@ -185,20 +190,27 @@ function MainContainer() {
 
   //hàm này nhấn vào
   const handleLiClick = (index) => {
-    setActiveIndex(index);
     if(!isSend){
       callAPIStop();
+      setTimeout(() => {
+        setActiveIndex(index);
+      }, 300);
+    }else{
+      setActiveIndex(index);
     }
-    
+
     callAPI
       .MessServicesGetMess(index)
       .then((res) => {
         setIsIntro(false);
         setMessages(res.data);
+       
       })
       .catch((error) => {
         Validation(error);
       });
+
+      
   };
 
   return (

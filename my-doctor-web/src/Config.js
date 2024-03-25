@@ -2,7 +2,7 @@
 
 
 // các đường dẫn xuống backend
-const url_root =  "http://127.0.0.1:9999"
+const url_root =  "http://192.168.1.3:9999"
 
 export const url_login = url_root + "/auth/login";
 export const url_logout = url_root + "/auth/logout";
